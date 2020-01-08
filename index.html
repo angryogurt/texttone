@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html>
+   <head>
+       <meta charset="utf-8">
+       <title> TexTone - Оценка тональности текста</title>
+       <meta charset="utf-8" />
+       <script type="text/javascript" src="assets/js/jquery.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $('#form').submit(function(event){
+                    $("#in2").text("Проводим анализ тональности текста...");
+                    $.post("cgi-bin/input.py",{data:$("#in1").val()},onResponse);
+                    return false;
+                })
+                function onResponse(data){
+                    $("#in2").text("Текст позитивный с вероятностью в "+data+"%");
+                }
+            })
+        </script>
+        <link rel="shortcut icon" href="../assets/img/favicon.ico" type="image/x-icon">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Amatic+SC&display=swap" rel="stylesheet">
+        <link href="assets/css/main.css" rel="stylesheet">
+    </head>
+    <body>
+        <h1>Сентимент-анализатор текста</h1>
+        <p>Для анализа тональности текста введите его в поле ниже и нажмите кнопку "Проверить"</p>
+        <form id="form" method="POST">
+            <input id="in1" type="text" required placeholder="Например: Приют для котят сообщает радостную новость - все питомцы нашли свой новый дом!"/>
+            <br>
+            <button id="btn">Проверить</button>
+        </form>
+        <p id="in2">Ждем данные...</p>
+        <p>Рекомендуемая длинна текста - до 25 слов. Среднее время ответа - 7 секунд</p>
+        <p class="discription">Анализ тональности текста (сентимент-анализ, англ. Sentiment analysis, англ. Opinion mining) — класс методов контент-анализа в компьютерной лингвистике, предназначенный для автоматизированного выявления в текстах эмоционально окрашенной лексики и эмоциональной оценки авторов (мнений) по отношению к объектам, речь о которых идёт в тексте</p>
+        <footer>Анализ текста проводится сверточной нейронной сетью (<a href="https://habr.com/ru/company/mailru/blog/417767/">CNN</a>), обученной на <a href="https://study.mokoron.com/">корпусе коротких текстов Twitter</a><br><a href="https://vk.com/cpcpsu">Creativity Project Center - 2019</a>
+        </footer>
+    </body>
+</html>
